@@ -1,5 +1,5 @@
 /**
- * Created by mosesesan on 12/06/2017.
+ * Created by qzy on 12/06/2017.
  */
 import React, {Component} from 'react';
 import {
@@ -33,7 +33,6 @@ export default class Moment extends Component {
                     <View style={styles.textWrap}>
                         <Text style={styles.title}>{this.props.title}</Text>
                     </View>
-
                 </View>
             </View>
         );
