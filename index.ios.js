@@ -10,7 +10,10 @@ const {width, height} = Dimensions.get("window");
 
 const Images = [
   {image: require('./images/vodka.jpg'), title: "Vodka Cran"},
-  {image: require('./images/an-old-fashioned-with-a-surprising-design-specially-for-you-as-the-latest-Old-Fashion-collection-12.jpg'), title: "Old Fashion"},
+  {
+    image: require('./images/an-old-fashioned-with-a-surprising-design-specially-for-you-as-the-latest-Old-Fashion-collection-12.jpg'),
+    title: "Old Fashion"
+  },
   {image: require('./images/Moscow-Mule-new.jpg'), title: "Mule"},
   {image: require('./images/strawberry.jpg'), title: "Strawberry Daiquiri"},
 
@@ -35,8 +38,16 @@ export default class EggHeadRNAnimations extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      animatedScroll: new Animated.Value(0)
+      animatedScroll: new Animated.Value(0),
+      scrollEnabled: true,
     };
+
+  }
+
+  handleFocus = (focused) => {
+    this.setState({
+      scrollEnabled: !focused,
+    })
   }
 
   render() {
@@ -45,6 +56,7 @@ export default class EggHeadRNAnimations extends Component {
           <ScrollView
               pagingEnabled
               horizontal
+              scrollEnabled={this.state.scrollEnabled}
               scrollEventThrottle={16}
               onScroll={
                 Animated.event([
@@ -62,6 +74,8 @@ export default class EggHeadRNAnimations extends Component {
                 return (
                     <Moment
                         key={i}
+                        onFocus={this.handleFocus}
+                        focused={!this.state.scrollEnabled}
                         {...image}
                         translateX={getInterpolate(this.state.animatedScroll, i, Images.length)}
                     />
